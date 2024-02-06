@@ -157,9 +157,10 @@ axis equal
 
 %%
 figure
-plot(T,moving_tank(3,:))
+plot(T,out.xout(:,4))
 hold on
-plot(T,moving_tank(6,:),'--')
+plot(T,out.xout(:,5))
+title('com position')
 xlabel('time (s)') 
-ylabel('Disturbance (m/s^2)') 
-legend({'x-direction','y-direction'})
+ylabel('Disturbu (m/s^2)') 
+legend({'actual x-com','actual y-com'})
