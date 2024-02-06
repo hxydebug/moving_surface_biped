@@ -27,17 +27,17 @@ xlabel('time (s)')
 ylabel('position (m)') 
 legend({'desired zmp','actual zmp low','actual zmp high'})
 
-figure
-plot(x_z_tank(1,:),x_z_tank(end,:))
-hold on
-plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
-plot(out.xout(:,4),out.xout(:,5))
-plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
-title('foot placement(ZMP) in x-y plane')
-xlabel('x position (m)') 
-ylabel('y position (m)') 
-legend({'actual zmp','desired zmp','actual com','desired com'})
-axis equal 
+% figure
+% plot(x_z_tank(1,:),x_z_tank(end,:))
+% hold on
+% plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
+% plot(out.xout(:,4),out.xout(:,5))
+% plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
+% title('foot placement(ZMP) in x-y plane')
+% xlabel('x position (m)') 
+% ylabel('y position (m)') 
+% legend({'actual zmp','desired zmp','actual com','desired com'})
+% axis equal 
 
 % footprint
 figure
@@ -47,9 +47,9 @@ for i=1:length(x_z_tank(1,:))
     hold on
 end
 plot(x_z_tank(1,:),x_z_tank(end,:))
-plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
+% plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
 plot(out.xout(:,4)'-moving_tank(1,:),out.xout(:,5)'-moving_tank(4,:))
-plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
+% plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
 title('foot placement(ZMP) in x-y plane')
 xlabel('x position (m)') 
 ylabel('y position (m)') 
