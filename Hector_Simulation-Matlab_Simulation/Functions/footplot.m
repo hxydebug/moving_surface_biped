@@ -133,19 +133,20 @@ figure % position
 plot(T,out.xout(:,4))
 hold on
 plot(T,out.xout(:,5))
+plot(T,out.xout(:,6))
 title('com position')
 xlabel('time (s)') 
 ylabel('position (m)') 
-legend({'actual x-com','actual y-com'})
+legend({'actual x-com','actual y-com','actual z-com'})
 %%
 % footprint
 figure
 
-for i=1:length(x_z_tank(1,:))
+for i=1:length(x_z_tank(1,1:160))
     rectangle('Position',[x_z_tank(1,i)-0.06,x_z_tank(end,i)-0.01,0.12,0.02])
     hold on
 end
-plot(x_z_tank(1,:),x_z_tank(end,:))
+plot(x_z_tank(1,1:160),x_z_tank(end,1:160))
 % plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
 plot(out.xout(:,4)'-moving_tank(1,:),out.xout(:,5)'-moving_tank(4,:))
 % plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
