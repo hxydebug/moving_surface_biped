@@ -6,7 +6,7 @@ function tau=Swing_PD(uin)
 %test=test+1 % check this output to locate break point
 
 global  dt_MPC gait i_gait acc_t i_MPC_var dt_MPC_vec stand_position current_height MPC_controller
-global fx_end_R fx_end_L fy_end_R fy_end_L
+global fx_end_R fx_end_L fy_end_R fy_end_L moving_xy
 t=uin(1);
 if t < 0.2
     t = 0;
@@ -30,16 +30,21 @@ v_act=x(10:12); % CoM velocity
 % Feedback term coefficient
 % (rough approximation, actual COM is lower than xdes(6))
 % K_step=1*(0.1*xdes(6))^0.5;
-K_step = 0.03;
+K_step = 0.13;
 
 dt = dt_MPC;
 gaitcycle = dt_MPC*10;
+
+dx_s = moving_xy(2);
+dy_s = moving_xy(5);
 
 vx_des = xdes(10); % CoM desired vel
 vy_des = xdes(11);
 vx_act = v_act(1); % CoM actual vel
 vy_act = v_act(2);
 wz_act=w_act(3);
+
+
 
 % desired lift height of each foot:
 lift_height = 0.12;

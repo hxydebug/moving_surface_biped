@@ -3,27 +3,27 @@ close all
 set(groot, 'defaulttextinterpreter','latex')
 set(groot, 'defaultaxesticklabelinterpreter','latex')
 set(groot, 'defaultlegendinterpreter','latex')
-
+T=0:0.008:5;
 %% plot
 figure
-plot(u_zmp_tank(1,:))
+plot(T,u_zmp_tank(1,:))
 hold on
-plot(x_z_tank(1,:)-0.06)
-plot(x_z_tank(1,:)+0.06)
+plot(T,x_z_tank(1,:)-0.06)
+plot(T,x_z_tank(1,:)+0.06)
 
 title('foot placement(ZMP) in x direction')
-xlabel('timestep (0.008s one step)') 
+xlabel('time (s)') 
 ylabel('position (m)') 
 legend({'desired zmp','actual zmp low','actual zmp high'})
 
 figure
-plot(u_zmp_tank(end,:))
+plot(T,u_zmp_tank(end,:))
 hold on
-plot(x_z_tank(end,:)-0.01)
-plot(x_z_tank(end,:)+0.01)
+plot(T,x_z_tank(end,:)-0.01)
+plot(T,x_z_tank(end,:)+0.01)
 
 title('foot placement(ZMP) in y direction')
-xlabel('timestep (0.008s one step)') 
+xlabel('time (s)') 
 ylabel('position (m)') 
 legend({'desired zmp','actual zmp low','actual zmp high'})
 
@@ -96,25 +96,25 @@ xlabel('horizon (dT=0.01s)')
 ylabel('position (m)') 
 legend({'up_zmp','low_zmp','ZMP_lowConstraint','ZMP_upConstraint'})
 
-% figure % velocity
-% plot(out.xout(:,10))
-% hold on
-% plot(out.xout(:,11))
-% plot(ddxyz_com_tank(3,:))
-% plot(ddxyz_com_tank(4,:))
-% title('com velocity')
-% xlabel('timestep (0.008s one step)') 
-% ylabel('velocity (m/s)') 
-% legend({'actual x-com','actual y-com','desired x-com','desired y-com'})
-% 
-% figure % position
-% plot(out.xout(:,4))
-% hold on
-% plot(out.xout(:,5))
-% plot(ddxyz_com_tank(1,:))
-% plot(ddxyz_com_tank(2,:))
-% title('com position')
-% xlabel('timestep (0.008s one step)') 
-% ylabel('position (m)') 
-% legend({'actual x-com','actual y-com','desired x-com','desired y-com'})
+figure % velocity
+plot(T,out.xout(:,10))
+hold on
+plot(T,out.xout(:,11))
+plot(T,ddxyz_com_tank(3,:))
+plot(T,ddxyz_com_tank(4,:))
+title('com velocity')
+xlabel('time (s)') 
+ylabel('velocity (m/s)') 
+legend({'actual x-com','actual y-com','desired x-com','desired y-com'})
+
+figure % position
+plot(T,out.xout(:,4))
+hold on
+plot(T,out.xout(:,5))
+plot(T,ddxyz_com_tank(1,:))
+plot(T,ddxyz_com_tank(2,:))
+title('com position')
+xlabel('time (s)') 
+ylabel('position (m)') 
+legend({'actual x-com','actual y-com','desired x-com','desired y-com'})
 (66+69+660+25.3+472+44.66+36.48+116+23.9+128+57.11+125+29+295)/2;
