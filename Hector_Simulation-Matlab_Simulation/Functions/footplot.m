@@ -95,7 +95,7 @@ title('Contingency MPC in y direction')
 xlabel('horizon (dT=0.01s)') 
 ylabel('position (m)') 
 legend({'up_zmp','low_zmp','ZMP_lowConstraint','ZMP_upConstraint'})
-
+%%
 figure % velocity
 plot(T,out.xout(:,10))
 hold on
@@ -118,3 +118,21 @@ xlabel('time (s)')
 ylabel('position (m)') 
 legend({'actual x-com','actual y-com','desired x-com','desired y-com'})
 (66+69+660+25.3+472+44.66+36.48+116+23.9+128+57.11+125+29+295)/2;
+
+%%
+% footprint
+figure
+
+for i=1:length(x_z_tank(1,:))
+    rectangle('Position',[x_z_tank(1,i)-0.06,x_z_tank(end,i)-0.01,0.12,0.02])
+    hold on
+end
+plot(x_z_tank(1,:),x_z_tank(end,:))
+% plot(u_zmp_tank(1,:),u_zmp_tank(end,:))
+plot(out.xout(:,4)'-moving_tank(1,:),out.xout(:,5)'-moving_tank(4,:))
+% plot(ddxyz_com_tank(1,:),ddxyz_com_tank(2,:))
+title('foot placement(ZMP) in x-y plane')
+xlabel('x position (m)') 
+ylabel('y position (m)') 
+legend({'actual zmp','actual com'})
+axis equal

@@ -15,10 +15,10 @@ global X_min X_max Y_min Y_max
 
 L=0.525;
 g=9.81;
-ddxy_s_max = [10;10];
-ddxy_s_min = [-10;-10];
-% ddxy_s_max = [0;0];
-% ddxy_s_min = [0;0];
+% ddxy_s_max = [10;10];
+% ddxy_s_min = [-10;-10];
+ddxy_s_max = [0;0];
+ddxy_s_min = [0;0];
 MPC_controller = CMPC(g,L,ddxy_s_max,ddxy_s_min);
 % MPC_controller = ACC_MPC(g,L);
 xy_com = [0;0;0;0];
