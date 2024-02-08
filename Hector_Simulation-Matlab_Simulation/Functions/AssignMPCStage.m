@@ -5,9 +5,11 @@ function xy = AssignMPCStage(t)
 
 %  gait: walking = 1; hopping = 2; running = 3
 
-global acc_t dt_MPC_vec i_MPC_var dt_MPC i_gait gait global_t moving_xy
-
+global acc_t dt_MPC_vec i_MPC_var dt_MPC i_gait gait global_t moving_xy dx dy x y count random
+global last_acc
     global_t = t;
+    dt = 0.0005;
+
     % stand on two feet
     if t < 0.2
         gait = 0;
@@ -22,16 +24,35 @@ global acc_t dt_MPC_vec i_MPC_var dt_MPC i_gait gait global_t moving_xy
         T_periodx = 0.6;
         Ay = 0.1;
         T_periody = 0.6;
+        % x = Ax*sin((t - 0.2)*2*pi/T_periodx);
+        % dx = Ax*2*pi/T_periodx*cos((t - 0.2)*2*pi/T_periodx);
+        
+        % y = Ay*sin((t - 0.2)*2*pi/T_periody);
+        % dy = Ay*2*pi/T_periody*cos((t - 0.2)*2*pi/T_periody);
 
-        x = Ax*sin((t - 0.2)*2*pi/T_periodx);
-        dx = Ax*2*pi/T_periodx*cos((t - 0.2)*2*pi/T_periodx);
-        ddx = -Ax*2*pi/T_periodx*2*pi/T_periodx*sin((t - 0.2)*2*pi/T_periodx);
-        y = Ay*sin((t - 0.2)*2*pi/T_periody);
-        dy = Ay*2*pi/T_periody*cos((t - 0.2)*2*pi/T_periody);
-        ddy = -Ay*2*pi/T_periody*2*pi/T_periody*sin((t - 0.2)*2*pi/T_periody);
+        % ddx = -Ax*2*pi/T_periodx*2*pi/T_periodx*sin((t - 0.2)*2*pi/T_periodx);
+        % ddy = -Ay*2*pi/T_periody*2*pi/T_periody*sin((t - 0.2)*2*pi/T_periody);
 
+        % random
+        ddxy_s = random(:,count); % 0.56  0.58
+        if abs(ddxy_s(1) - last_acc(1)) > 0.9
+            ddxy_s(1) = last_acc(1) + sign((ddxy_s(1) - last_acc(1)))*0.9;
+        end
+
+        if abs(ddxy_s(2) - last_acc(2)) > 0.9
+            ddxy_s(2) = last_acc(2) + sign((ddxy_s(2) - last_acc(2)))*0.9;
+        end
+        last_acc = ddxy_s;
+        count = count + 1;
+        ddx = ddxy_s(1);
+        ddy = ddxy_s(2);
+
+        dx = dx + ddx*dt;
+        x = x + dx*dt;
+        dy = dy + ddy*dt;
+        y = y + dy*dt;
         moving_xy = [x;dx;ddx;y;dy;ddy];
-        moving_xy = [0;0;0;0;0;0];
+        % moving_xy = [0;0;0;0;0;0];
 
         gait = 1;
         idx = find(acc_t<t - 0.2 + 1e-3);  %Find indices of nonzero elements.

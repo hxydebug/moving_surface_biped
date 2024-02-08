@@ -10,15 +10,21 @@ import casadi.*
 % generate global symbolic functions:
 global Contact_Jacobian Rotm_foot MPC_controller x_z xy_com xy_com_act footprint xy_com_tank desire_traj last_u I_error u_zmp global_t u_zmp_tank x_z_tank moving_tank
 global ddxyz_com_tank p_xy_tank fx_end_R fx_end_L fy_end_R fy_end_L last_point moving_xy up_u low_u
-global X_min X_max Y_min Y_max stance_leg
+global X_min X_max Y_min Y_max stance_leg dx dy x y random count last_acc
 [Contact_Jacobian,Rotm_foot]=Formulate_Contact_Jacobian;
 
+% set rand
+% a = -10;
+% b = 10;
+% random = a + (b-a)*rand(2,10000);
+last_acc = [0;0];
+count = 1;
 L=0.525;
 g=9.81;
-% ddxy_s_max = [10;10];
-% ddxy_s_min = [-10;-10];
-ddxy_s_max = [0;0];
-ddxy_s_min = [0;0];
+ddxy_s_max = [10;10];
+ddxy_s_min = [-10;-10];
+% ddxy_s_max = [0;0];
+% ddxy_s_min = [0;0];
 MPC_controller = CMPC(g,L,ddxy_s_max,ddxy_s_min);
 % MPC_controller = ACC_MPC(g,L);
 xy_com = [0;0;0;0];
@@ -44,6 +50,12 @@ last_point = 0;
 moving_xy = [0;0;0;0;0;0];
 up_u = [];
 low_u = [];
+% dx = 1.0472;
+% dy = 1.0472;
+dx = 0;
+dy = 0;
+x = 0;
+y = 0;
 %% General (sim world physics)
 world_damping = 1e-3;
 world_rot_damping = 1e-3;

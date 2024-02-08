@@ -56,20 +56,20 @@ ylabel('y position (m)')
 legend({'actual zmp','desired zmp','actual com','desired com'})
 axis equal 
 %%
-% figure
-% for i=1:length(X_min)
-%     rectangle('Position',[X_min(i),Y_min(i),X_max(i)-X_min(i),Y_max(i)-Y_min(i)])
-%     hold on
-% end
-% plot(X_min,Y_min)
-% plot(up_u(1,:),up_u(2,:))
-% plot(low_u(1,:),low_u(2,:))
-% 
-% title('foot position trajectory')
-% xlabel('x (m)') 
-% ylabel('y (m)') 
-% legend({'0','up_COM','low_COM'},'Location','southwest')
-% axis equal 
+figure
+for i=1:length(X_min)
+    rectangle('Position',[X_min(i),Y_min(i),X_max(i)-X_min(i),Y_max(i)-Y_min(i)])
+    hold on
+end
+plot(X_min,Y_min)
+plot(up_u(1,:),up_u(2,:))
+plot(low_u(1,:),low_u(2,:))
+
+title('foot position trajectory')
+xlabel('x (m)') 
+ylabel('y (m)') 
+legend({'0','up_COM','low_COM'},'Location','southwest')
+axis equal 
 
 %%
 % figure
