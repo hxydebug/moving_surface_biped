@@ -57,3 +57,42 @@ zlabel('z position (m)')
 legend({'actual zmp','actual com'})
 
 %% 
+moving_xy = [];
+x = 0;
+y = 0;
+dx = 0;
+dy = 0;
+dt = 0.0005;
+last_acc = [0;0];
+for i=1:10000
+    ddxy_s = random(:,i); % 0.56  0.58
+    if abs(ddxy_s(1) - last_acc(1)) > 3
+        ddxy_s(1) = last_acc(1) + sign((ddxy_s(1) - last_acc(1)))*3;
+    end
+
+    if abs(ddxy_s(2) - last_acc(2)) > 3
+        ddxy_s(2) = last_acc(2) + sign((ddxy_s(2) - last_acc(2)))*3;
+    end
+    last_acc = ddxy_s;
+    ddx = ddxy_s(1);
+    ddy = ddxy_s(2);
+
+    dx = dx + ddx*dt;
+    x = x + dx*dt;
+    dy = dy + ddy*dt;
+    y = y + dy*dt;
+    moving_xy = [moving_xy [x;dx;ddx;y;dy;ddy]];
+end
+figure
+plot(moving_xy(1,:))
+hold on
+plot(moving_xy(4,:))
+
+plot(moving_xy(2,:))
+plot(moving_xy(5,:))
+
+figure
+plot(moving_xy(3,:))
+hold on
+plot(moving_xy(6,:))
+legend({'x','y'})
