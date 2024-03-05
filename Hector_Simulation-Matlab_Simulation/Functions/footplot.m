@@ -130,14 +130,14 @@ ylabel('velocity (m/s)')
 legend({'actual x-com','actual y-com'})
 
 figure % position
-plot(T,out.xout(:,4))
+plot(T,out.xout(:,4),'-', 'LineWidth',1.5)
 hold on
-plot(T,out.xout(:,5))
-plot(T,out.xout(:,6))
-title('com position')
+plot(T,out.xout(:,5),'--', 'LineWidth',1.5)
+plot(T,out.xout(:,6),'-.', 'LineWidth',1.5)
 xlabel('time (s)') 
 ylabel('position (m)') 
 legend({'actual x-com','actual y-com','actual z-com'})
+set(gca,'fontsize',14)%%
 %%
 % footprint
 figure
@@ -165,6 +165,15 @@ xlabel('time (s)')
 ylabel('Disturbance (m/s^2)') 
 legend({'x-direction','y-direction'})
 
+figure
+plot(T,moving_tank(1,:))
+hold on
+plot(T,moving_tank(4,:),'--')
+plot(T,moving_tank(2,:))
+plot(T,moving_tank(5,:),'--')
+xlabel('time (s)') 
+ylabel('moving surface motion') 
+legend({'x-position','y-position','x-velocity','y-velocity'})
 %% 3D plot
 figure
 
